@@ -16,7 +16,7 @@ module "ingress-nginx" {
 module "test_app" {
   source   = "./modules/app/"
   hostname = "monks.tigkf.tech"
-  image = var.container_image
+  #image = var.container_image
   
   depends_on = [
     module.ingress-nginx

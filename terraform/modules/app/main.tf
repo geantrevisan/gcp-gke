@@ -16,9 +16,9 @@ resource "helm_release" "app-chart" {
   timeout = 60
 }
 
-variable "image" {
-  type = string
-}
+#variable "image" {
+#  type = string
+#}
 variable "hostname" {
   type = string
 }
