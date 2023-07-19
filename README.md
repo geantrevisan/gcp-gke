@@ -89,6 +89,10 @@ gcloud iam workload-identity-pools providers create-oidc "k8s-provider" --projec
 ```console
 gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.iam.gserviceaccount.com" --project="project-monks" --role="roles/owner" --member="principalSet://iam.googleapis.com/projects/534232678406/locations/global/workloadIdentityPools/k8s-git/attribute.repository/geantrevisan/gcp-gke"
 ```
+- [x] Adicionar permisssão token
+```console
+gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.iam.gserviceaccount.com" --project="project-monks" --role="roles/iam.serviceAccountTokenCreator" --member=serviceAccount:servicemonks@project-monks.iam.gserviceaccount.com
+```
 
 - [x] Workflows
 ```yaml
