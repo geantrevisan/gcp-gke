@@ -28,7 +28,6 @@ resource "google_container_node_pool" "primary_nodes" {
 # Run script para fazer configurações no cluster caso necessario, pois utilizaremos o IPA para acessar um terminal.
 # Source: https://fabianlee.org/2021/05/28/terraform-invoking-a-startup-script-for-a-gce-google_compute_instance/
 data "template_file" "run_script" {
-  metadata_startup_script = file("${path.module}/startup.sh")
   template = <<-EOF
   sudo apt-get update -y;
   sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl";
@@ -47,7 +46,7 @@ resource "google_compute_instance" "default" {
   machine_type = var.iap-desktop-shape ## Variavel para definir o shape da maquina.
 
   // Inicia script ao iniciar a maquina.
-  metadata_run_script = data.template_file.run_script.rendered
+  metadata_startup_script = data.template_file.run_script.rendered
 
   boot_disk {
     initialize_params {
