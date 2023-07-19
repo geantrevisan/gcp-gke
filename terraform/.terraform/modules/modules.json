@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"cloud-nat","Source":"registry.terraform.io/terraform-google-modules/cloud-nat/google","Version":"1.4.0","Dir":".terraform/modules/cloud-nat"},{"Key":"ingress-nginx","Source":"./modules/ingress-nginx","Dir":"modules/ingress-nginx"},{"Key":"test_app","Source":"./modules/app","Dir":"modules/app"}]}
