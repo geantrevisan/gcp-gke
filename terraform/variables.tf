@@ -79,10 +79,3 @@ variable "container_image" {
 #  type        = string
 #  default     = "gean22/appimage:latest" # Teste
 }
-
-variable "bucket_gcp" {
-#  Usado apenas para rodar na mão
-#  description = "Bucket"
-#  type        = string
-#  default     = "monks-gk"
-}
