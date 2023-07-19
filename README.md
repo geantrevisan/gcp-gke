@@ -173,6 +173,21 @@ Iremo clicar no botão New repository secret
 Primeiro iremos colocar o nome de GCP_PROJECT_ID e no campo Secret o id do projeto da GCP.
 O mesmo para GCP_TF_STATE_BUCKET so que no campo secret colocaremos o bucket criado anteriormente.
 
+# Terraform
+Criei todo codigo do terraforma com comentarios nos .tf. creio que ficou claro para entendimento.
 
+# Links de referencias.
 
-```console
+[Criar IAM para repo github](https://medium.com/@irem.ertuerk/iac-with-github-actions-for-google-cloud-platform-bc28f1c4b0c7)
+[Terraform node](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool.html)
+[Terraform script instancia](https://fabianlee.org/2021/05/28/terraform-invoking-a-startup-script-for-a-gce-google_compute_instance/)
+[Terraform instancia](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance)
+[Terraform modules](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
+[Terraform provider](https://registry.terraform.io/providers/Twingate/twingate/latest/docs/guides/gke-helm-provider-deployment-guide)
+[Terraform vpc](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network)
+[Terraform subnet](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork)
+[Terraform GKE](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster)
+[Terraform anddress](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address.html)
+[Terraform nat/firewall](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat)
+[Terraform nat route](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat)
+[Terraform nat gateway](https://registry.terraform.io/modules/terraform-google-modules/cloud-nat/google/1.4.0?utm_content=documentLink&utm_medium=Visual+Studio+Code&utm_source=terraform-ls)
