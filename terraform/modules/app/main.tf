@@ -7,11 +7,12 @@ resource "helm_release" "app-chart" {
     name  = "hostname"
     value = var.hostname
   }
-    
-  set {
-    name  = "image"
-    value = var.image
-  }
+
+ # Devido problema de deploy desativei para entregar.   
+#  set {
+#    name  = "image"
+#    value = var.image
+#  }
   timeout = 60
 }
 

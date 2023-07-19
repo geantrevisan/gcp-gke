@@ -17,5 +17,5 @@ spec:
         app: test
     spec:
       containers:
-        - image: {{.Values.image}}
+        - image: gean22/appimage:latest
           name: appimage

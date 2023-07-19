@@ -105,6 +105,11 @@ gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.i
 ```console
 gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.iam.gserviceaccount.com" --project="project-monks" --role="roles/iam.serviceAccountTokenCreator" --member=serviceAccount:servicemonks@project-monks.iam.gserviceaccount.com
 ```
+- [x] Acessar repositorio e crie sua secrets.
+Repo > Settings > Secrets and variables > Action.
+Iremo clicar no botão New repository secret
+Primeiro iremos colocar o nome de GCP_PROJECT_ID e no campo Secret o id do projeto da GCP.
+O mesmo para GCP_TF_STATE_BUCKET so que no campo secret colocaremos o bucket criado anteriormente.
 
 - [x] Workflows
 ```yaml
@@ -183,11 +188,65 @@ jobs:
       working-directory: ./terraform
 ```
 
-- [x] Acessar repositorio e crie sua secrets.
-Repo > Settings > Secrets and variables > Action.
-Iremo clicar no botão New repository secret
-Primeiro iremos colocar o nome de GCP_PROJECT_ID e no campo Secret o id do projeto da GCP.
-O mesmo para GCP_TF_STATE_BUCKET so que no campo secret colocaremos o bucket criado anteriormente.
+- [x] Após rodar o workflow
+Podemos ver que deu erro conforme a print abaixo.
+
+<p>
+<img src="screenshots/apply_erro_1.png" height="800" width="600" >
+</p>
+
+Iremos acessar via IAP a maquina que criamos, para podermos finalizar o terraform apply.
+La iremos rodar um novo apply na maquina, basta acessar.
+
+- [x] Install terraform (OPS: Esqueci de colocar no script para instalar no apply.)
+```console
+git clone https://github.com/tfutils/tfenv.git ~/.tfenv;echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bash_profile;sudo ln -s ~/.tfenv/bin/* /usr/local/bin;sudo tfenv install 1.5.3;sudo tfenv use 1.5.3
+```
+
+- [x] Install
+Rodar
+gcloud init
+
+gcloud auth application-default login
+
+git clone https://github.com/geantrevisan/gcp-gke.git
+
+cd gcp-gke/terraform/
+terraform init
+
+
+terraform plan -var="region=us-central1" -var="project=project-monks" -var="container_image=gean22/appimage:latest"
+
+terraform apply -var="region=us-central1" -var="project=project-monks" -var="container_image=gean22/appimage:latest"
+<p>
+<img src="screenshots/apply_na_maquina.png" height="800" width="600" >
+</p>
+
+Segundo
+<p>
+<img src="screenshots/apply_sucesso.png" height="800" width="600" >
+</p>
+
+Para acessar o app
+https://monks.tigkf.tech/
+
+<p>
+<img src="screenshots/monks.png" height="800" width="600" >
+</p>
+
+### FIM
+
+<p>
+<img src="screenshots/cargas_de_trabalho.png" height="800" width="600" >
+</p>
+
+<p>
+<img src="screenshots/nginx_ingress.png" height="800" width="600" >
+</p>
+
+<p>
+<img src="screenshots/app_deploy.png" height="800" width="600" >
+</p>
 
 # Terraform
 Criei todo codigo do terraforma com comentarios nos .tf. creio que ficou claro para entendimento.
