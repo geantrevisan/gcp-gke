@@ -50,7 +50,7 @@ resource "google_container_cluster" "primary" {
 
 ## Subir maquina com ip estatico.
 # Source: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address.html
-resource "" "ip_addr_internal" {
+resource "google_compute_address" "ip_addr_internal" {
   project      = var.project
   address_type = "INTERNAL"
   region       = var.region
