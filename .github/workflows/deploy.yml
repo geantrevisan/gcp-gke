@@ -54,7 +54,7 @@ jobs:
 
       # Terraform Init
     - name: Terraform init
-      run: terraform init -input=false -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="prefix=master"
+      run: yes | terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="prefix=master"
       working-directory: ./terraform
 
       # Terraform Plan

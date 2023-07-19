@@ -4,7 +4,7 @@ terraform {
     kubernetes = ">= 2.22.0"
   }
   backend "gcs" {
-    bucket  = var.bucket_gcp
+    bucket  = "monks-gk"
     prefix  = "master"
   }
   
