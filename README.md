@@ -75,20 +75,32 @@ export GOOGLE_APPLICATION_CREDENTIALS="cred.json"
 # Abaixo iremo criar IAM para utilizar CI/CD do github action.
 [Source](https://medium.com/@irem.ertuerk/iac-with-github-actions-for-google-cloud-platform-bc28f1c4b0c7)
 
+- [X] Ativa iam
+```console
+gcloud services enable iamcredentials.googleapis.com --project "project-monks"
+```
 - [x] Criar um workload identity pools
 ```console
 gcloud iam workload-identity-pools create "k8s-git" --project="project-monks" --location="global" --display-name="k8s"
+gcloud iam workload-identity-pools create "k8s-git" --project="project-monks" --location="global" --display-name="k8s"
+```
+
+- [x] Obter Workload Identity Pool
+```console
+gcloud iam workload-identity-pools describe "k8s-git" --project="project-monks" --location="global" --format="value(name)"
 ```
 
 - [x] Criar IAM k8s-git para pools
 ```console
-gcloud iam workload-identity-pools providers create-oidc "k8s-provider" --project="project-monks"  --location="global" --workload-identity-pool="k8s-git" --display-name="k8s provider" --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.aud=assertion.aud" --issuer-uri="https://token.actions.githubusercontent.com"
+gcloud iam workload-identity-pools providers create-oidc "k8s-provider" --project="project-monks" --location="global" --workload-identity-pool="k8s-git" --display-name="k8s provider" --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository" --issuer-uri="https://token.actions.githubusercontent.com"
 ```
 
 - [x] Relação com IAM servicemonks e k8s IAM.
 ```console
-gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.iam.gserviceaccount.com" --project="project-monks" --role="roles/owner" --member="principalSet://iam.googleapis.com/projects/534232678406/locations/global/workloadIdentityPools/k8s-git/attribute.repository/geantrevisan/gcp-gke"
+gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.iam.gserviceaccount.com" --project="project-monks" --role="roles/iam.workloadIdentityUser" --member="principalSet://iam.googleapis.com/projects/534232678406/locations/global/workloadIdentityPools/k8s-git/attribute.repository/geantrevisan/gcp-gke"
+
 ```
+
 - [x] Adicionar permisssão token
 ```console
 gcloud iam service-accounts add-iam-policy-binding "servicemonks@project-monks.iam.gserviceaccount.com" --project="project-monks" --role="roles/iam.serviceAccountTokenCreator" --member=serviceAccount:servicemonks@project-monks.iam.gserviceaccount.com
