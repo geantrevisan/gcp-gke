@@ -70,13 +70,14 @@ variable "whitelist-ips" {
   description = "Whistelist ips"
   type        = list(string)
   default     = ["35.235.240.0/20"]
+  # OBS o range de ip acima é da google para utilizar IPA conexão.
 }
 
 variable "container_image" {
 #  Usado apenas para rodar na mão
 #  description = "Imagem docker"
 #  type        = string
-#  default     = "gean22/appimage:latest"
+#  default     = "gean22/appimage:latest" # Teste
 }
 
 variable "bucket_gcp" {

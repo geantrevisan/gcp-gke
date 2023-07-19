@@ -1,9 +1,3 @@
-# Cria bucket.
-# Source: https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/storage_bucket
-data "google_storage_bucket" "my-bucket" {
-  name = var.bucket_gcp
-}
-
 # Criar node pool.
 # Source: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool.html
 resource "google_container_node_pool" "primary_nodes" {

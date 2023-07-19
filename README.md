@@ -12,13 +12,12 @@
 
 <p>
 <img src="https://w7.pngwing.com/pngs/816/934/png-transparent-nginx-hd-logo-thumbnail.png" height="36" width="36" >
-<img src="https://www.docker.com/wp-content/uploads/2022/03/horizontal-logo-monochromatic-white.png" height="36" width="36" >
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kubernetes_logo.svg/2560px-Kubernetes_logo.svg.png"  height="36" width="36" >
+<img src="https://seeklogo.com/images/D/docker-logo-6D6F987702-seeklogo.com.png" height="36" width="36" >
+<img src="https://juststickers.in/wp-content/uploads/2018/11/kubernetes-wordmark.png"  height="36" width="36" >
 <img src="https://helm.sh/img/helm.svg"  height="36" width="36" >
 <img src="https://www.gend.co/hs-fs/hubfs/gcp-logo-cloud.png?width=730&name=gcp-logo-cloud.png" height="36" >
 <img src="https://miro.medium.com/v2/resize:fit:900/0*SM6gpc8GRfy65MmK.png" height="36" >
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Terraform_Logo.svg/1280px-Terraform_Logo.svg.png" height="36" >
-
 </p>
 
 # Sobre caso
@@ -168,3 +167,12 @@ jobs:
       working-directory: ./terraform
 ```
 
+- [x] Acessar repositorio e crie sua secrets.
+Repo > Settings > Secrets and variables > Action.
+Iremo clicar no botão New repository secret
+Primeiro iremos colocar o nome de GCP_PROJECT_ID e no campo Secret o id do projeto da GCP.
+O mesmo para GCP_TF_STATE_BUCKET so que no campo secret colocaremos o bucket criado anteriormente.
+
+
+
+```console
