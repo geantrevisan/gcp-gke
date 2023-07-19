@@ -1,0 +1,4 @@
+.tfstate
+cred.json
+.terraform
+.DS_Store

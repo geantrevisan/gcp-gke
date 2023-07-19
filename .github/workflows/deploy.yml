@@ -1,0 +1,73 @@
+name: Deploy to kubernetes
+on:
+  push:
+    branches:
+      - "main"
+
+env:
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  TF_STATE_BUCKET_NAME: ${{ secrets.GCP_TF_STATE_BUCKET }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_TAG: ${{ github.sha }}
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    
+    steps:
+    - uses: 'actions/checkout@v3'
+
+    # Login com GCP.
+    - id: 'auth'
+      name: 'Login na Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/534232678406/locations/global/workloadIdentityPools/k8s-git/providers/k8s-provider'
+        service_account: 'servicemonks@project-monks.iam.gserviceaccount.com'
+        
+    # Instalar gcloud SDK
+    - name: 'Intalling GCloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+    # Login GCP para enviar docker image.
+    - name: docker auth
+      run: gcloud auth configure-docker
+    
+    # Mostra conta autenticada.
+    - run: gcloud auth list
+
+    # Build image e envia.
+    - name: Build e push docker image
+      run: |
+        docker build -t us.gcr.io/$GCP_PROJECT_ID/appimage:$IMAGE_TAG .
+        docker push us.gcr.io/$GCP_PROJECT_ID/appimage:$IMAGE_TAG
+      working-directory: ./app
+
+      # Configura Terraform
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+      # Terraform Init
+    - name: Terraform init
+      run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="prefix=test"
+      working-directory: ./terraform
+
+      # Terraform Plan
+    - name: Terraform Plan
+      run: |
+        terraform plan \
+        -var="region=us-central1" \
+        -var="project=$GCP_PROJECT_ID" \
+        -var="container_image=us.gcr.io/$GCP_PROJECT_ID/appimage:$IMAGE_TAG" \
+        -out=PLAN
+      working-directory: ./terraform
+
+      # Terraform Apply
+    - name: Terraform Apply
+      run: terraform apply PLAN
+      working-directory: ./terraform

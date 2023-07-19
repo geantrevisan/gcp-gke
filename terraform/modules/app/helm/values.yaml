@@ -1,0 +1,2 @@
+hostname: testapp.com
+image: gean22/appimage:latest
